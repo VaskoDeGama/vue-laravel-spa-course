@@ -1,7 +1,18 @@
 <template>
     <div>
-        <h1>Title</h1>
-        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusantium amet autem consequatur deserunt dolorem
-            eius enim eos error ex excepturi explicabo, impedit labore mollitia nemo nisi nobis nostrum quis unde.</p>
+        <h2>{{ itemTitle }}</h2>
+        <p> {{ itemContetn }}</p>
     </div>
 </template>
+
+
+<script>
+    export default {
+        props: {
+            itemTitle: String,
+            itemContetn: String,
+            itemPrice: Number,
+        },
+
+    }
+</script>
