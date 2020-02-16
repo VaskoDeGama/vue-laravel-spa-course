@@ -1,7 +1,7 @@
 <template>
     <div class="card">
         <div class="card-body">
-            <h2 class="card-title">{{ itemTitle +' '+ itemId }}</h2>
+            <h5 class="card-title">{{ itemTitle +' '+ itemId }}</h5>
             <p class="card-text">{{ itemContetn }}</p>
             <a href="#" class="btn btn-primary float-right">{{ itemPrice * itemId }}</a>
         </div>

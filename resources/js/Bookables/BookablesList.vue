@@ -15,7 +15,7 @@
                                 :item-price="item.price" >
                         </bookable-list-item>
                 </div>
-                <div class="col" v-for="placeHolder in placeHoldersInRow(row)" :key="placeholder +'p'">
+                <div class="col" v-for="placeHolder in placeHoldersInRow(row)" :key="placeHolder +'p'">
 
                 </div>
             </div>
