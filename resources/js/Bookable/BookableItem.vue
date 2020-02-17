@@ -35,7 +35,7 @@
             axios
                 .get(`/api/bookables/${this.$route.params.id}`)
                 .then(res => {
-                    this.item = res.data;
+                    this.item = res.data.data;
                     this.isLoading = false;
                 })
         }

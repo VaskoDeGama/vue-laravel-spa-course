@@ -51,7 +51,8 @@
            axios
                .get('/api/bookables')
                .then(res => {
-                   this.items = res.data;
+                   this.items = res.data.data;
+                   console.log(this.items);
                    this.isLoading = false;
                });
 
