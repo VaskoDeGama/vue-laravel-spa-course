@@ -29,7 +29,11 @@
                 >
             </div>
         </div>
-        <button class="btn btn-secondary btn-block" @click="check">Check</button>
+        <button
+                class="btn btn-secondary btn-block"
+                @click="check"
+                :disabled="!isLoaded"
+        >Check</button>
     </div>
 </template>
 
@@ -45,11 +49,30 @@
             return {
                 from: null,
                 to: null,
+                isLoaded: true,
+                status: null,
+                errors: null,
+
             }
         },
         methods: {
             check() {
-                alert('cheked');
+                this.isLoaded = false;
+                this.errors = null;
+                axios
+                    .get(`/api/bookables/${this.$route.params.id}/availability?from=${this.from}&to=${this.to}`)
+                    .then(res => {
+                        this.status = res.status;
+                        this.isLoaded = true;
+                    })
+                    .catch(error => {
+                        if (422 === error.response.status) {
+                            this.errors = error.response.data.errors;
+                        }
+                        this.status = error.response.status;
+                    })
+                    .then(() => this.isLoaded = true);
+
             }
         }
     }

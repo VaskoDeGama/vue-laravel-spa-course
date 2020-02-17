@@ -8,13 +8,13 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
 class BookableAvailabilityController extends Controller
+
 {
     /**
      * Handle the incoming request.
-     *
-     * @param $id Bookable id
+     * @param $id Bookable Id
      * @param \Illuminate\Http\Request $request
-     *
+     * @return \Illuminate\Http\JsonResponse
      */
     public function __invoke($id, Request $request)
     {
@@ -26,7 +26,7 @@ class BookableAvailabilityController extends Controller
         $bookable = Bookable::findOrFail($id);
 
         return $bookable->availableFor($data['from'],$data['to'])
-            ? response()->json([], 200)
+            ? response()->json([])
             : response()->json([], 404);
 
     }
