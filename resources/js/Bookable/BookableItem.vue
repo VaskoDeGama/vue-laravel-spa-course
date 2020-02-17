@@ -33,7 +33,7 @@
         created() {
             this.isLoading = true;
             axios
-                .get(`/api/bookable/${this.$route.params.id}`)
+                .get(`/api/bookables/${this.$route.params.id}`)
                 .then(res => {
                     this.item = res.data;
                     this.isLoading = false;

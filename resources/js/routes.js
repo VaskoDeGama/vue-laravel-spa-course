@@ -16,7 +16,7 @@ const routes = [
         name: 'second',
     },
     {
-        path: '/bookable/:id',
+        path: '/bookables/:id',
         component: Bookable,
         name: 'bookable',
     }
