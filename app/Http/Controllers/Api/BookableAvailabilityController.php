@@ -24,5 +24,7 @@ class BookableAvailabilityController extends Controller
         ]);
 
         $bookable = Bookable::findOrFail($id);
+
+        dd($bookable->bookings()->beetwinDates($data['from'],$data['to'])->count());
     }
 }

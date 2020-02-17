@@ -15,3 +15,5 @@ yarn-error.log
 .idea/inspectionProfiles/
 .idea/php.xml
 .idea/workspace.xml
+/_ide_helper.php
+/.phpstorm.meta.php
