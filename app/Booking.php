@@ -34,6 +34,13 @@ class Booking extends Model
         return $this->belongsTo(Bookable::class);
     }
 
+    /**
+     * scope for query Beetwin Dates
+     * @param Builder $query
+     * @param $from
+     * @param $to
+     * @return Builder
+     */
     public function scopeBeetwinDates(Builder $query, $from, $to) {
         return $query->where('to', '>=', $from)
             ->where('from', '<=', $to);

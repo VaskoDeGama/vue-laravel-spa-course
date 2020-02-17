@@ -26,8 +26,23 @@ use Illuminate\Database\Eloquent\Model;
  */
 class Bookable extends Model
 {
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
     public function bookings() {
         return $this->hasMany(Booking::class);
+    }
+
+    /**
+     *
+     * Checks if the number of entries in the transmitted time interval is equal to zero
+     *
+     * @param $from
+     * @param $to
+     * @return bool
+     */
+    public function availableFor($from, $to) {
+        return 0 === $this->bookings()->beetwinDates($from,$to)->count();
     }
 
 }

@@ -14,7 +14,7 @@ class BookableAvailabilityController extends Controller
      *
      * @param $id Bookable id
      * @param \Illuminate\Http\Request $request
-     * @return void
+     *
      */
     public function __invoke($id, Request $request)
     {
@@ -25,6 +25,9 @@ class BookableAvailabilityController extends Controller
 
         $bookable = Bookable::findOrFail($id);
 
-        dd($bookable->bookings()->beetwinDates($data['from'],$data['to'])->count());
+        return $bookable->availableFor($data['from'],$data['to'])
+            ? response()->json([], 200)
+            : response()->json([], 404);
+
     }
 }
