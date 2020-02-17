@@ -1,9 +1,8 @@
 <template>
-    <div class="card">
+    <div class="card w-100">
         <div class="card-body">
-            <h5 class="card-title">{{ itemTitle +' '+ itemId }}</h5>
-            <p class="card-text">{{ itemContetn }}</p>
-            <a href="#" class="btn btn-primary float-right">{{ itemPrice * itemId }}</a>
+            <h5 class="card-title">{{ title }}</h5>
+            <p class="card-text">{{ description }}</p>
         </div>
     </div>
 </template>
@@ -13,10 +12,9 @@
 
     export default {
         props: {
-            itemId: Number,
-            itemTitle: String,
-            itemContetn: String,
-            itemPrice: Number,
+            id: Number,
+            title: String,
+            description: String,
         },
 
     }

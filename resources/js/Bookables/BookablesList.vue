@@ -4,19 +4,13 @@
             Data is loading...
         </div>
         <div v-else>
-            <div class="row mb-4" v-for="row in rows" :key="row+'row'">
-                <div class="col"
-                     v-for="(item, column) in itemsInRow(row)"
-                     :key="'col'+column" >
-                        <bookable-list-item
-                                :item-id="item.id"
-                                :item-title="item.title"
-                                :item-contetn="item.content"
-                                :item-price="item.price" >
-                        </bookable-list-item>
+            <div class="row" v-for="row in rows" :key="row+'row'">
+                <div class="col d-flex align-items-stretch  mb-4"
+                     v-for="item in itemsInRow(row)"
+                     :key="item.id" >
+                        <bookable-list-item v-bind="item"></bookable-list-item>
                 </div>
                 <div class="col" v-for="placeHolder in placeHoldersInRow(row)" :key="placeHolder +'p'">
-
                 </div>
             </div>
         </div>
@@ -53,71 +47,15 @@
         },
         created() {
             this.isLoading = true;
-            setTimeout(() => {
-                this.items = [
-                    {
-                        id: 1,
-                        title : "Villa",
-                        content: "Some information about this villa",
-                        price: 1000,
-                    },
-                    {
-                        id: 2,
-                        title : "Villa",
-                        content: "Some information about this villa",
-                        price: 1000,
-                    },
-                    {
-                        id: 3,
-                        title : "Villa",
-                        content: "Some information about this villa",
-                        price: 1000,
-                    },
-                    {
-                        id: 4,
-                        title : "Villa",
-                        content: "Some information about this villa",
-                        price: 1000,
-                    },
-                    {
-                        id: 5,
-                        title : "Villa",
-                        content: "Some information about this villa",
-                        price: 1000,
-                    },
-                    {
-                        id: 6,
-                        title : "Villa",
-                        content: "Some information about this villa",
-                        price: 1000,
-                    },
-                    {
-                        id: 7,
-                        title : "Villa",
-                        content: "Some information about this villa",
-                        price: 1000,
-                    },
-                    {
-                        id: 8,
-                        title : "Villa",
-                        content: "Some information about this villa",
-                        price: 1000,
-                    },
-                    {
-                        id: 9,
-                        title : "Villa",
-                        content: "Some information about this villa",
-                        price: 1000,
-                    },
-                    {
-                        id: 10,
-                        title : "Villa",
-                        content: "Some information about this villa",
-                        price: 1000,
-                    }
-                ];
-                this.isLoading = false;
-            }, 3000);
+
+           axios
+               .get('/api/bookables')
+               .then(res => {
+                   this.items = res.data;
+                   this.isLoading = false;
+               });
+
+
         }
     }
 </script>
