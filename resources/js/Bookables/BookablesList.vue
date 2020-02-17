@@ -5,7 +5,7 @@
         </div>
         <div v-else>
             <div class="row" v-for="row in rows" :key="row+'row'">
-                <div class="col d-flex align-items-stretch  mb-4"
+                <div class="col-md-4 d-flex align-items-stretch  mb-4"
                      v-for="item in itemsInRow(row)"
                      :key="item.id" >
                         <bookable-list-item v-bind="item"></bookable-list-item>
@@ -52,7 +52,6 @@
                .get('/api/bookables')
                .then(res => {
                    this.items = res.data.data;
-                   console.log(this.items);
                    this.isLoading = false;
                });
 

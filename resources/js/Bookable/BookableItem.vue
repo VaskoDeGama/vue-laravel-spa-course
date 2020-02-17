@@ -1,7 +1,7 @@
 <template>
     <div class="row">
         <div class="col-md-8">
-            <div class="card" >
+            <div class="card mb-4" >
                 <div class="card-body">
                     <div v-if="!isLoading">
                         <h5>{{item.title}}</h5>
@@ -17,13 +17,17 @@
             </div>
         </div>
         <div class="col-md-4">
-            avaliable & prices
+            <availability></availability>
         </div>
     </div>
 </template>
 
 <script>
+    import Availability from './Availability';
     export default {
+        components: {
+            Availability,
+        },
         data() {
             return  {
                 item: null,
