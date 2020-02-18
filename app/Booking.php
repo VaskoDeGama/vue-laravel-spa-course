@@ -34,6 +34,11 @@ class Booking extends Model
         return $this->belongsTo(Bookable::class);
     }
 
+
+    public function review() {
+        return $this->hasOne(Review::class);
+    }
+
     /**
      * scope for query Beetwin Dates
      * @param Builder $query

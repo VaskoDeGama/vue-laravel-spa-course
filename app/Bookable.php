@@ -33,6 +33,10 @@ class Bookable extends Model
         return $this->hasMany(Booking::class);
     }
 
+    public function reviews() {
+        return $this->hasMany(Review::class);
+    }
+
     /**
      *
      * Checks if the number of entries in the transmitted time interval is equal to zero
