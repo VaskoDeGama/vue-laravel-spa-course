@@ -1,6 +1,6 @@
 <template>
     <div>
-        <h6 class="text-uppercase text text-secondary font-weight-bolder">
+        <h6 class="text-uppercase text-secondary font-weight-bolder">
             Check Availability
             <span v-if="noAvailability" class="text-danger">(NOT AVAILABLE)</span>
             <span v-if="hasAvailability" class="text-success">(AVAILABLE)</span>
@@ -101,12 +101,12 @@
     }
 </script>
 
-<style>
+<style scoped>
     label {
         font-size: 0.7em;
     }
     .is-invalid {
-        background-image: none !important;
+        background-image: none;
     }
 
 </style>
