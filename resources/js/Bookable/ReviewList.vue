@@ -1,5 +1,5 @@
 <template>
-    <div class="d-md-block d-none">
+    <div class="d-md-block d-none padding-rem">
         <h6 class="text-uppercase text-secondary font-weight-bolder">Review List</h6>
         <div class="border-bottom pt-1 mb-3 " v-for="item in 3" :key="item">
             <div class="row">
@@ -25,5 +25,8 @@
 </script>
 
 <style scoped>
-
+ .padding-rem{
+     padding-left: 1.25rem;
+     padding-right: 1.25rem;
+ }
 </style>
