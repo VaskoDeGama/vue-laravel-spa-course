@@ -1,6 +1,7 @@
 <template>
     <div class="d-md-block d-none padding-rem">
         <h6 class="text-uppercase text-secondary font-weight-bolder">Review List</h6>
+
         <div class="" v-if="!isLoaded">
             No reviews yet
         </div>
@@ -8,8 +9,8 @@
             <div class="row">
                 <div class="col-md-6">Vasiliy Kamenyuk</div>
                 <div class="col-md-6 d-flex justify-content-end">
-                    {{ review.rating }}
-                    <star-rating></star-rating>
+
+                    <star-rating :rating="review.rating"></star-rating>
                 </div>
             </div>
             <div class="row">

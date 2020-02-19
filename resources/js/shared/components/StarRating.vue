@@ -1,7 +1,7 @@
 <template>
     <div class="d-flex">
         <i class="fa fa-star" v-for="star in fullStars" :key="star + 'fs'"></i>
-        <i class="fa fa-star-half-alt" v-for="halfStar in halfStar" :key="halfStar + 'hs'"></i>
+        <i class="fa fa-star-half-alt" v-if="halfStar"></i>
         <i class="far fa-star" v-for="emptyStar in emptyStars" :key="emptyStar + 'es'"></i>
     </div>
 </template>
@@ -14,15 +14,22 @@
         },
         computed: {
             halfStar() {
-                return 1;
+                const fraction = Math.round(
+                    (this.rating - Math.floor(this.rating)) * 100
+                );
+                return fraction > 0 && fraction < 50;
             },
             fullStars() {
-                return 2;
+                return Math.round(this.rating);
             },
             emptyStars() {
-                return 2;
+                return 5 - Math.ceil(this.rating);
             }
-        }
+        },
+        created() {
+
+
+        },
     }
 </script>
 
