@@ -4,17 +4,17 @@
         <div class="" v-if="!isLoaded">
             No reviews yet
         </div>
-        <div v-else class="border-bottom pt-1 mb-3 " v-for="(item,index) in reviews" :key="index">
+        <div v-else class="border-bottom pt-1 mb-3 " v-for="(review,index) in reviews" :key="index">
             <div class="row">
                 <div class="col-md-6">Vasiliy Kamenyuk</div>
-                <div class="col-md-6 d-flex justify-content-end">{{item.rating}}</div>
+                <div class="col-md-6 d-flex justify-content-end">{{ review.rating }}</div>
             </div>
             <div class="row">
-                <div class="col-md-12">{{item.created_at}}</div>
+                <div class="col-md-12">{{ review.created_at | fromNow }}</div>
             </div>
             <div class="row">
                 <div class="col-md-12 pt-4 pb-4">
-                    {{item.content}}
+                    {{review.content}}
                 </div>
             </div>
         </div>
@@ -24,6 +24,7 @@
 </template>
 
 <script>
+    import moment from 'moment';
     export default {
         props: {
             bookableId: [String,Number],
@@ -42,6 +43,9 @@
                     this.isLoaded = true;
                 });
         },
+        filters: {
+
+        }
     }
 </script>
 
