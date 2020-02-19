@@ -3,7 +3,7 @@
         <div class="col-md-8">
             <div class="card mb-4" >
                 <div class="card-body">
-                    <div v-if="!isLoading">
+                    <div v-if="!isLoaded">
                         <h5>{{item.title}}</h5>
                         <hr>
                         <article>
@@ -15,10 +15,10 @@
                     </div>
                 </div>
             </div>
-            <review-list></review-list>
+            <review-list :bookable-id="this.bookableId"></review-list>
         </div>
         <div class="col-md-4">
-            <availability></availability>
+            <availability :bookable-id="this.bookableId"></availability>
         </div>
     </div>
 </template>
@@ -34,16 +34,17 @@
         data() {
             return  {
                 item: null,
-                isLoading: false,
+                isLoaded: false,
+                bookableId: this.$route.params.id
             }
         },
         created() {
-            this.isLoading = true;
+            this.isLoaded = true;
             axios
                 .get(`/api/bookables/${this.$route.params.id}`)
                 .then(res => {
                     this.item = res.data.data;
-                    this.isLoading = false;
+                    this.isLoaded = false;
                 })
         }
     }
