@@ -17,3 +17,6 @@ yarn-error.log
 .idea/workspace.xml
 /_ide_helper.php
 /.phpstorm.meta.php
+/public/fonts/
+/public/css/app.css
+/public/js/app.js

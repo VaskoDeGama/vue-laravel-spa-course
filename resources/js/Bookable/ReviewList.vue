@@ -7,7 +7,10 @@
         <div v-else class="border-bottom pt-1 mb-3 " v-for="(review,index) in reviews" :key="index">
             <div class="row">
                 <div class="col-md-6">Vasiliy Kamenyuk</div>
-                <div class="col-md-6 d-flex justify-content-end">{{ review.rating }}</div>
+                <div class="col-md-6 d-flex justify-content-end">
+                    {{ review.rating }}
+                    <star-rating></star-rating>
+                </div>
             </div>
             <div class="row">
                 <div class="col-md-12">{{ review.created_at | fromNow }}</div>
@@ -25,7 +28,9 @@
 
 <script>
     import moment from 'moment';
+    import StarRating from "../shared/components/StarRating";
     export default {
+        components: {StarRating},
         props: {
             bookableId: [String,Number],
         },
