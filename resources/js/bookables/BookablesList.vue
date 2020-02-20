@@ -1,6 +1,6 @@
 <template>
     <div>
-        <div v-if="isLoading">
+        <div v-if="!isLoaded">
             Data is loading...
         </div>
         <div v-else>
@@ -27,7 +27,7 @@
         data() {
             return {
                 items: null,
-                isLoading: false,
+                isLoaded: false,
                 columns: 3,
 
             }
@@ -46,13 +46,13 @@
             }
         },
         created() {
-            this.isLoading = true;
+            this.isLoaded = true;
 
            axios
                .get('/api/bookables')
                .then(res => {
                    this.items = res.data.data;
-                   this.isLoading = false;
+                   this.isLoaded = false;
                });
 
 
