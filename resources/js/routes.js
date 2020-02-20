@@ -4,6 +4,7 @@ import VueRouter from 'vue-router';
 import Bookables from './bookables/BookablesList';
 import Bookable from './bookable/BookableItem';
 import Review from './review/Review';
+import NotFound from "./shared/components/NotFound";
 
 const routes = [
     {
@@ -20,6 +21,11 @@ const routes = [
         path: '/review/:id',
         component: Review,
         name: 'review'
+    },
+    {
+        path: '*',
+        component: NotFound,
+        name: 'not-found'
     }
 ];
 

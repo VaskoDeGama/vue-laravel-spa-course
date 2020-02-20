@@ -1,6 +1,6 @@
 <template>
     <div>
-        <div v-if="!isLoaded">
+        <div v-if="isLoaded">
             Data is loading...
         </div>
         <div v-else>
