@@ -4,6 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Str;
 
 /**
  * App\Booking
@@ -49,5 +50,15 @@ class Booking extends Model
     public function scopeBeetwinDates(Builder $query, $from, $to) {
         return $query->where('to', '>=', $from)
             ->where('from', '<=', $to);
+    }
+
+    protected static function boot()
+    {
+        parent::boot();
+
+        static::creating(function($booking) {
+           $booking -> review_key = Str::uuid();
+        });
+
     }
 }
