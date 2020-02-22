@@ -1,7 +1,6 @@
 <template>
     <div>
-        <div class="row" v-if="error"> Unknown error has occured, please try again later!</div>
-
+        <fatal-error v-if="error"></fatal-error>
         <div class="row" v-else>
             <div :class="[{'col-md-4': twoColumns}, {'d-none': oneColumn}]">
                 <div class="card">
@@ -79,9 +78,10 @@
                         return axios.get(`/api/booking-by-review/${this.review.id}`)
                             .then(res => this.booking = res.data.data)
                             .catch(err => {
-                                this.error = !is404(err);
+                                this.error = is404(err);
                             })
                     }
+                    this.error = true;
                 })
                 .then(() => {
                     this.isLoading = false;
@@ -107,17 +107,17 @@
         },
         methods: {
             submit() {
-              this.isLoading = true;
-              axios.post(`/api/reviews`, this.review)
-                  .then(res => {
-                      console.log(res);
-                  })
-                  .catch(err => {
-                      this.error = true;
-                  })
-                  .then(() => {
-                     this.isLoading = false;
-                  });
+                this.isLoading = true;
+                axios.post(`/api/reviews`, this.review)
+                    .then(res => {
+                        console.log(res);
+                    })
+                    .catch(err => {
+                        this.error = true;
+                    })
+                    .then(() => {
+                        this.isLoading = false;
+                    });
             },
         }
 
