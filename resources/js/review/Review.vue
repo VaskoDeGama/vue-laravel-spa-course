@@ -40,7 +40,7 @@
                             <textarea class="form-control" cols="30" name="content" rows="10"
                                       v-model="review.content"></textarea>
                         </div>
-                        <button class="btn btn-large btn-primary btn-block">Submit</button>
+                        <button class="btn btn-large btn-primary btn-block" @click.prevent="submit" :disabled="isLoading">Submit</button>
                     </div>
                 </div>
 
@@ -105,6 +105,21 @@
             },
 
         },
+        methods: {
+            submit() {
+              this.isLoading = true;
+              axios.post(`/api/reviews`, this.review)
+                  .then(res => {
+                      console.log(res);
+                  })
+                  .catch(err => {
+                      this.error = true;
+                  })
+                  .then(() => {
+                     this.isLoading = false;
+                  });
+            },
+        }
 
 
     }
