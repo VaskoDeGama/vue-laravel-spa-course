@@ -16,4 +16,8 @@ class ReviewController extends Controller
     public function show($id){
         return new ReviewRecource(Review::findOrFail($id));
     }
+
+    public function store(Request $request) {
+
+    }
 }
