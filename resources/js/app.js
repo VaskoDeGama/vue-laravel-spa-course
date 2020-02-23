@@ -7,6 +7,7 @@ import StarRating from './shared/components/StarRating'
 import NotFound from './shared/components/NotFound'
 import FatalError from './shared/components/fatalError'
 import ValidationsError from './shared/components/ValidationsErrors'
+import Success from './shared/components/Success'
 
 window.Vue = require('vue');
 
@@ -14,6 +15,7 @@ Vue.use(VueRouter);
 Vue.component('star-rating', StarRating);
 Vue.component('not-found', NotFound);
 Vue.component('fatal-error', FatalError);
+Vue.component('success', Success);
 Vue.component('v-errors', ValidationsError);
 
 

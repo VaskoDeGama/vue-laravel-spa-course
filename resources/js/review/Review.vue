@@ -1,7 +1,10 @@
 <template>
     <div>
+        <success v-if="success">
+            You've left review, thank you very much!
+        </success>
         <fatal-error v-if="error"></fatal-error>
-        <div class="row" v-else>
+        <div class="row" v-if="!success">
             <div :class="[{'col-md-4': twoColumns}, {'d-none': oneColumn}]">
                 <div class="card">
                     <div class="card-body">
@@ -27,7 +30,6 @@
                     <div v-if="hasReview">
                         <h3>You've already left a review for this booking!</h3>
                     </div>
-
                     <div v-else>
                         <div class="form-group">
                             <label class="text-muted">Select the star rating (1 is worst - 5 is best)</label>
@@ -71,6 +73,7 @@
                 booking: null,
                 error: false,
                 sending: null,
+                success: false,
             }
         },
         async created() {
@@ -113,9 +116,11 @@
             submit() {
                 this.errors = null;
                 this.sending = true;
+                this.success = false;
+
                 axios.post(`/api/reviews`, this.review)
                     .then(res => {
-                        console.log(res);
+                        this.success = res.status === 201;
                     })
                     .catch(err => {
                         if (is422(err)) {
