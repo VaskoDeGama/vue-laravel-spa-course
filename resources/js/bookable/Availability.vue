@@ -48,9 +48,11 @@
 
 
 <script>
-    import {is404, is422} from './../shared/utils/response'
+    import {is422} from './../shared/utils/response'
+    import validationsError from './../shared/mixins/validationsError'
 
     export default {
+        mixins: [validationsError],
         props: {
           bookableId: [String,Number],
         },
@@ -60,7 +62,6 @@
                 to: null,
                 isLoaded: true,
                 status: null,
-                errors: null,
             }
         },
         methods: {
@@ -82,9 +83,7 @@
                     .then(() => this.isLoaded = true);
 
             },
-            errorFor(field) {
-                return this.hasErrors && this.errors[field] ? this.errors[field]  : null;
-            }
+
         },
         computed: {
             hasErrors() {
