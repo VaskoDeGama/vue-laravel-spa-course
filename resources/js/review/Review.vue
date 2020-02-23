@@ -36,11 +36,14 @@
                         </div>
                         <div class="form-group">
                             <label class="text-muted" for="content">Describe your experiance with</label>
-                            <textarea class="form-control" cols="30" name="content" rows="10"
-                                      v-model="review.content" :class="[{'is-invalid': this.errorFor('content')}]"></textarea>
+                            <textarea :class="[{'is-invalid': this.errorFor('content')}]" class="form-control" cols="30" name="content"
+                                      rows="10"
+                                      v-model="review.content"></textarea>
                             <v-errors :errors="errorFor('content')"></v-errors>
                         </div>
-                        <button class="btn btn-large btn-primary btn-block" @click.prevent="submit" :disabled="sending">Submit</button>
+                        <button :disabled="sending" @click.prevent="submit" class="btn btn-large btn-primary btn-block">
+                            Submit
+                        </button>
                     </div>
                 </div>
 
@@ -70,25 +73,23 @@
                 sending: null,
             }
         },
-        created() {
+        async created() {
             this.isLoading = true;
             this.review.id = this.$route.params.id;
-
-            axios.get(`/api/reviews/${this.review.id}`)
-                .then(res => this.existingReview = res.data.data)
-                .catch(err => {
-                    if (is404(err)) {
-                        return axios.get(`/api/booking-by-review/${this.review.id}`)
-                            .then(res => this.booking = res.data.data)
-                            .catch(err => {
-                                this.error = is404(err);
-                            })
+            try {
+                this.existingReview = (await axios.get(`/api/reviews/${this.review.id}`)).data.data;
+            } catch (err) {
+                if (is404(err)) {
+                    try {
+                        this.booking = (await axios.get(`/api/booking-by-review/${this.review.id}`)).data.data;
+                    } catch (err) {
+                        this.error = is404(err);
                     }
+                } else {
                     this.error = true;
-                })
-                .then(() => {
-                    this.isLoading = false;
-                });
+                }
+            }
+            this.isLoading = false;
         },
         computed: {
             alredyReviewed() {
@@ -117,10 +118,10 @@
                         console.log(res);
                     })
                     .catch(err => {
-                        if(is422(err)) {
+                        if (is422(err)) {
                             const errors = err.response.data.errors;
 
-                            if(errors['content'] && 1 === _.size(errors)) {
+                            if (errors['content'] && 1 === _.size(errors)) {
                                 this.errors = errors;
                                 return;
                             }
