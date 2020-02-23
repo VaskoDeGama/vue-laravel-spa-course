@@ -38,9 +38,7 @@
                             <label class="text-muted" for="content">Describe your experiance with</label>
                             <textarea class="form-control" cols="30" name="content" rows="10"
                                       v-model="review.content" :class="[{'is-invalid': this.errorFor('content')}]"></textarea>
-                            <div class="invalid-feedback" v-for="(error,index) in this.errorFor('content')" :key="index + 'content'">
-                                {{error}}
-                            </div>
+                            <v-errors :errors="errorFor('content')"></v-errors>
                         </div>
                         <button class="btn btn-large btn-primary btn-block" @click.prevent="submit" :disabled="sending">Submit</button>
                     </div>
