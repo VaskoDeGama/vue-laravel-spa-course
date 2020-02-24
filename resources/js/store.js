@@ -7,7 +7,7 @@ export default {
     },
     mutations: {
         setLastSearch(state, payload) {
-            state.lastChance = payload;
+            state.lastSearch = payload;
         },
 
     }

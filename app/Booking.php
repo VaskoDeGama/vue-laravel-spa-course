@@ -60,6 +60,13 @@ class Booking extends Model
         return static::where('review_key', $reviewKey)->with('bookable')->get()->first();
     }
 
+    /**
+     * @param number $bookable_id
+     * @return Booking|null
+     */
+    public static function findByBookableId (number $bookable_id): ?Booking {
+        return static::where('bookable_id', $$bookable_id)->with('bookable')->get()->all();
+    }
 
     protected static function boot()
     {

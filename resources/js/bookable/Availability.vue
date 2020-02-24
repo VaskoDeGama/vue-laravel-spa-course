@@ -68,6 +68,12 @@
             check() {
                 this.isLoaded = false;
                 this.errors = null;
+
+                this.$store.commit('setLastSearch', {
+                    from: this.from,
+                    to: this.to,
+                });
+
                 axios
                     .get(`/api/bookables/${this.bookableId}/availability?from=${this.from}&to=${this.to}`)
                     .then(res => {
