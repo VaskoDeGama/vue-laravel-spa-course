@@ -4,9 +4,7 @@ import VueRouter from 'vue-router';
 import Bookables from './bookables/BookablesList';
 import Bookable from './bookable/BookableItem';
 import Review from './review/Review';
-import BookingList from './booking/BookingList';
 import NotFound from "./shared/components/NotFound";
-
 
 const routes = [
     {
@@ -25,16 +23,10 @@ const routes = [
         name: 'review'
     },
     {
-        path: '/booking-list/:id',
-        component: BookingList,
-        name: 'booking-list'
-    },
-    {
         path: '*',
         component: NotFound,
         name: 'not-found'
-    },
-
+    }
 ];
 
 const router = new VueRouter({

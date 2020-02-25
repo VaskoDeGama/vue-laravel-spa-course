@@ -4,8 +4,7 @@
             You've left review, thank you very much!
         </success>
         <fatal-error v-if="error"></fatal-error>
-
-        <div class="row" v-if="!success && !error">
+        <div class="row" v-if="!success">
             <div :class="[{'col-md-4': twoColumns}, {'d-none': oneColumn}]">
                 <div class="card">
                     <div class="card-body">
