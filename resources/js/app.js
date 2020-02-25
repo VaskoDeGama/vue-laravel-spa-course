@@ -8,6 +8,7 @@ import StarRating from './shared/components/StarRating';
 import NotFound from './shared/components/NotFound';
 import FatalError from './shared/components/fatalError';
 import ValidationsError from './shared/components/ValidationsErrors';
+import LoadingIndicator from './shared/components/LoadingIndicator';
 import Success from './shared/components/Success';
 import storeDeginition from './store';
 
@@ -20,6 +21,7 @@ Vue.component('not-found', NotFound);
 Vue.component('fatal-error', FatalError);
 Vue.component('success', Success);
 Vue.component('v-errors', ValidationsError);
+Vue.component('loading-indicator', LoadingIndicator);
 
 
 Vue.filter('fromNow', value => {

@@ -44,8 +44,9 @@
         <button
                 class="btn btn-secondary btn-block"
                 @click="check"
-                :disabled="!isLoaded"
-        >Check</button>
+                :disabled="!isLoaded">
+            <loading-indicator :loading="this.isLoaded" object="spinner" pulse="true"> Cheking availability...</loading-indicator>
+        </button>
     </div>
 </template>
 
