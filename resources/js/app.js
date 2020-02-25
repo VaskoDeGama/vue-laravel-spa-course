@@ -9,6 +9,7 @@ import NotFound from './shared/components/NotFound';
 import FatalError from './shared/components/fatalError';
 import ValidationsError from './shared/components/ValidationsErrors';
 import Success from './shared/components/Success';
+import storeDeginition from './store';
 
 
 window.Vue = require('vue');
@@ -25,16 +26,8 @@ Vue.filter('fromNow', value => {
     return moment(value).fromNow();
 });
 
-const store = new Vuex.Store({
-    state: {
-        count: 0
-    },
-    mutations: {
-        increment (state) {
-            state.count += 1;
-        }
-    }
-});
+const store = new Vuex.Store(storeDeginition);
+
 const app = new Vue({
     el: '#app',
     store,
