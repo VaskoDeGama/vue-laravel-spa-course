@@ -58,8 +58,8 @@
         },
         data() {
             return {
-                from: this.$store.state.lastSearch.from || null,
-                to: this.$store.state.lastSearch.to || null,
+                from: this.$store.state.lastSearch.from,
+                to: this.$store.state.lastSearch.to,
                 isLoaded: true,
                 status: null,
             }
@@ -69,7 +69,7 @@
                 this.isLoaded = false;
                 this.errors = null;
 
-                this.$store.commit('setLastSearch', {
+                this.$store.dispatch('setLastSearch', {
                     from: this.from,
                     to: this.to,
                 });
