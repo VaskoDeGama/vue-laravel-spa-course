@@ -9,6 +9,11 @@
 <script>
     export default {
         name: "NotFound",
+        created() {
+            this.$store.commit('increment');
+            console.log(this.$store.state.count);
+        }
+
     }
 </script>
 
