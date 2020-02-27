@@ -18,7 +18,7 @@
             <review-list :bookable-id="this.bookableId"></review-list>
         </div>
         <div class="col-md-4">
-            <availability :bookable-id="this.bookableId"></availability>
+            <availability :bookable-id="this.bookableId"  v-on:availability="checkPrice($event)"></availability>
         </div>
     </div>
 </template>
@@ -35,17 +35,34 @@
             return  {
                 item: null,
                 isLoaded: false,
-                bookableId: this.$route.params.id
+                bookableId: this.$route.params.id,
+                price: null,
+                from: this.$store.state.lastSearch.from,
+                to: this.$store.state.lastSearch.to,
             }
         },
         created() {
             this.isLoaded = true;
             axios
-                .get(`/api/bookables/${this.$route.params.id}`)
+                .get(`/api/bookables/${this.bookableId}`)
                 .then(res => {
                     this.item = res.data.data;
                     this.isLoaded = false;
                 })
+        },
+        methods: {
+            async checkPrice(hasAvailability) {
+                if(hasAvailability) {
+                    try {
+                        this.price  = (await axios.get(`/api/bookables/${this.bookableId}/price?from=${this.from}&to=${this.to}`)).data.data;
+                        console.log(this.price);
+                    } catch (err) {
+
+                    }
+                }
+
+
+            }
         }
     }
 </script>

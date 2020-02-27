@@ -70,7 +70,7 @@
             }
         },
         methods: {
-            check() {
+            async check() {
                 this.isLoaded = false;
                 this.errors = null;
 
@@ -79,20 +79,17 @@
                     to: this.to,
                 });
 
-                axios
-                    .get(`/api/bookables/${this.bookableId}/availability?from=${this.from}&to=${this.to}`)
-                    .then(res => {
-                        this.status = res.status;
-                        this.isLoaded = true;
-                    })
-                    .catch(error => {
-                        if (is422(error)) {
-                            this.errors = error.response.data.errors;
-                        }
-                        this.status = error.response.status;
-                    })
-                    .then(() => this.isLoaded = true);
+                try {
+                    this.status = (await axios.get(`/api/bookables/${this.bookableId}/availability?from=${this.from}&to=${this.to}`)).status;
+                    this.$emit('availability', this.hasAvailability);
+                } catch (err) {
+                    if (is422(err)) {
+                        this.errors = err.response.data.errors;
+                    }
+                    this.status = err.response.status;
+                }
 
+                this.isLoaded=true;
             },
 
         },
