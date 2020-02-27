@@ -9,12 +9,9 @@
 Homestead.json
 Homestead.yaml
 npm-debug.log
-yarn-error.log
-/.idea/test.iml
+.idea
 .idea/composerJson.xml
 .idea/inspectionProfiles/
-.idea/php.xml
-.idea/workspace.xml
 /_ide_helper.php
 /.phpstorm.meta.php
 /public/fonts/
