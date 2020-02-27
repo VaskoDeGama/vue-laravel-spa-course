@@ -23,6 +23,10 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Bookable whereTitle($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Bookable whereUpdatedAt($value)
  * @mixin \Eloquent
+ * @property int $price
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Review[] $reviews
+ * @property-read int|null $reviews_count
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Bookable wherePrice($value)
  */
 class Bookable extends Model
 {

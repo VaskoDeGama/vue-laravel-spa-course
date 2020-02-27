@@ -26,6 +26,10 @@ use Illuminate\Support\Str;
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Booking whereTo($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Booking whereUpdatedAt($value)
  * @mixin \Eloquent
+ * @property string $review_key
+ * @property-read \App\Review $review
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Booking beetwinDates($from, $to)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Booking whereReviewKey($value)
  */
 class Booking extends Model
 {
