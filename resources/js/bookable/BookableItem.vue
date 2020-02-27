@@ -19,8 +19,14 @@
                 </div>
                 <review-list v-if="!loading" :bookable-id="bookable.id"></review-list>
             </div>
-            <div class="col-md-4" v-if="!loading">
-                <availability :bookable-id="bookable.id"  v-on:availability="checkPrice($event)"></availability>
+            <div class="col-md-4 pb-4" v-if="!loading">
+                <availability :bookable-id="bookable.id"  v-on:availability="checkPrice($event)" class="mb-4"></availability>
+                <transition name="fade">
+                    <price-break-down v-if="price" :price="price" class="mb-4"></price-break-down>
+                </transition>
+                <transition name="fade">
+                    <button class="btn btn-outline-secondary btn-block" v-if="price">Book now!</button>
+                </transition>
             </div>
         </div>
     </div>
@@ -30,11 +36,13 @@
 <script>
     import Availability from './Availability';
     import ReviewList from './ReviewList';
+    import PriceBreakDown from './PriceBreakDown';
     import {mapState} from "vuex";
     export default {
         components: {
             Availability,
             ReviewList,
+            PriceBreakDown,
         },
         data() {
             return  {
