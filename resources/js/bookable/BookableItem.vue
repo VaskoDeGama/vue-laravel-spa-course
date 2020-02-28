@@ -28,10 +28,22 @@
                 <transition name="fade">
                     <button class="btn btn-outline-secondary btn-block"
                             v-if="price"
-                            @click="addToBasket">Book now!</button>
+                            @click="addToBasket"
+                            :disabled="inBasketAlready"
+                    >Book now!</button>
                 </transition>
+
+                <button class="btn btn-outline-secondary btn-block"
+                        v-if="inBasketAlready"
+                        @click="removeFromBasket"
+                >Remove from basket</button>
+
+                <div class="mt-4 text-muted warning" v-if="inBasketAlready">
+                    Seems like you've added this object to basket already. If you want to change dates, remove from the
+                    basket first
+                </div>
             </div>
-        </div>
+        </div>x
     </div>
 
 </template>
@@ -40,7 +52,7 @@
     import Availability from './Availability';
     import ReviewList from './ReviewList';
     import PriceBreakDown from './PriceBreakDown';
-    import {mapState} from "vuex";
+    import {mapState, mapGetters} from "vuex";
 
     export default {
         components: {
@@ -65,9 +77,18 @@
                 this.error = err;
             }
         },
-        computed: mapState({
-            lastSearch: 'lastSearch'
-        }),
+        computed: {
+            ...mapState({
+                lastSearch: 'lastSearch',
+            }),
+            inBasketAlready() {
+                if (null === this.bookable) {
+                    return false;
+                }
+                return this.$store.getters.inBasketAlready(this.bookable.id);
+            }
+
+        },
         methods: {
             async checkPrice(hasAvailability) {
                 if (!hasAvailability) {
@@ -82,12 +103,21 @@
                 }
             },
             addToBasket() {
-                this.$store.commit('addToBasket', {
+                this.$store.dispatch('addBasket', {
                     bookable: this.bookable,
                     price: this.price,
                     dates: this.lastSearch
                 })
+            },
+            removeFromBasket() {
+                this.$store.dispatch('removeBasket', this.bookable.id);
             }
         }
     }
 </script>
+
+<style scoped>
+    .warning {
+        font-size: 0.7rem;
+    }
+</style>

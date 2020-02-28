@@ -16,8 +16,12 @@ export default {
             state.basket.items.push(payload);
         },
         removeFromBasket(state, payload) {
-            state.basket.items.filter(item => item.bookable.id !== payload);
+            state.basket.items = state.basket.items.filter(item => item.bookable.id !== payload);
+        },
+        setBasket(state, payload) {
+            state.basket = payload;
         }
+
     },
     actions: {
         setLastSearch(context, payload) {
@@ -29,10 +33,26 @@ export default {
             if (lastSeacrh) {
                 context.commit('setLastSearch', JSON.parse(lastSeacrh));
             }
-        }
+            const basket = localStorage.getItem('basket');
+            if(basket) {
+                context.commit('setBasket', JSON.parse(basket));
+            }
+        },
+        addBasket({ commit, state }, payload) {
+            commit('addToBasket', payload);
+            localStorage.setItem('basket', JSON.stringify(state.basket));
+        },
+        removeBasket({ commit, state }, payload) {
+            commit('removeFromBasket', payload);
+            localStorage.setItem('basket', JSON.stringify(state.basket));
+        },
     },
     getters: {
         itemsInBasket: (state) => state.basket.items.length,
+        inBasketAlready(state) {
+            return function (id) {
+                return state.basket.items.reduce((result, item) => result || item.bookable.id === id, false);
+            }
+        }
     }
-
 }
