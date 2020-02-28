@@ -3,7 +3,7 @@
         <fatal-error v-if="error"></fatal-error>
         <div class="row" v-else>
             <div class="col-md-8">
-                <div class="card mb-4" >
+                <div class="card mb-4">
                     <div class="card-body">
                         <div v-if="!loading">
                             <h5>{{bookable.title}}</h5>
@@ -17,15 +17,18 @@
                         </div>
                     </div>
                 </div>
-                <review-list v-if="!loading" :bookable-id="bookable.id"></review-list>
+                <review-list :bookable-id="bookable.id" v-if="!loading"></review-list>
             </div>
             <div class="col-md-4 pb-4" v-if="!loading">
-                <availability :bookable-id="bookable.id"  v-on:availability="checkPrice($event)" class="mb-4"></availability>
+                <availability :bookable-id="bookable.id" class="mb-4"
+                              v-on:availability="checkPrice($event)"></availability>
                 <transition name="fade">
-                    <price-break-down v-if="price" :price="price" class="mb-4"></price-break-down>
+                    <price-break-down :price="price" class="mb-4" v-if="price"></price-break-down>
                 </transition>
                 <transition name="fade">
-                    <button class="btn btn-outline-secondary btn-block" v-if="price">Book now!</button>
+                    <button class="btn btn-outline-secondary btn-block"
+                            v-if="price"
+                            @click="addToBasket">Book now!</button>
                 </transition>
             </div>
         </div>
@@ -38,6 +41,7 @@
     import ReviewList from './ReviewList';
     import PriceBreakDown from './PriceBreakDown';
     import {mapState} from "vuex";
+
     export default {
         components: {
             Availability,
@@ -45,7 +49,7 @@
             PriceBreakDown,
         },
         data() {
-            return  {
+            return {
                 bookable: null,
                 loading: false,
                 price: null,
@@ -55,29 +59,35 @@
         async created() {
             this.loading = true;
             try {
-                this.bookable  = (await axios.get(`/api/bookables/${this.$route.params.id}`)).data.data;
+                this.bookable = (await axios.get(`/api/bookables/${this.$route.params.id}`)).data.data;
                 this.loading = false;
             } catch (err) {
                 this.error = err;
             }
         },
-        computed: mapState ({
-           lastSearch: 'lastSearch'
+        computed: mapState({
+            lastSearch: 'lastSearch'
         }),
         methods: {
             async checkPrice(hasAvailability) {
-                if(!hasAvailability) {
+                if (!hasAvailability) {
                     this.price = null;
                     return;
                 }
 
                 try {
-                    this.price  = (await axios.get(`/api/bookables/${this.bookable.id}/price?from=${this.lastSearch.from}&to=${this.lastSearch.to}`)).data.data;
+                    this.price = (await axios.get(`/api/bookables/${this.bookable.id}/price?from=${this.lastSearch.from}&to=${this.lastSearch.to}`)).data.data;
                 } catch (err) {
                     this.price = null;
                 }
-
             },
+            addToBasket() {
+                this.$store.commit('addToBasket', {
+                    bookable: this.bookable,
+                    price: this.price,
+                    dates: this.lastSearch
+                })
+            }
         }
     }
 </script>
