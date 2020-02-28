@@ -5,7 +5,7 @@ export default {
             to: null
         },
         basket: {
-            item: [],
+            items: [],
         }
     },
     mutations: {
@@ -13,10 +13,10 @@ export default {
             state.lastSearch = payload;
         },
         addToBasket(state, payload) {
-            state.basket.item.push(payload);
+            state.basket.items.push(payload);
         },
         removeFromBasket(state, payload) {
-            state.basket.item.filter(item => item.bookable.id !== payload);
+            state.basket.items.filter(item => item.bookable.id !== payload);
         }
     },
     actions: {
@@ -30,5 +30,9 @@ export default {
                 context.commit('setLastSearch', JSON.parse(lastSeacrh));
             }
         }
+    },
+    getters: {
+        itemsInBasket: (state) => state.basket.items.length,
     }
+
 }
