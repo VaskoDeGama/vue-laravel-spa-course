@@ -11,7 +11,21 @@
                     </h6>
                 </div>
                 <div v-for="item in basket" :key="item.bookable.id">
-                    item
+                    <div class="pt-2 pb-2 border-top d-flex justify-content-between">
+                        <span>
+                            <router-link :to="{ name: 'bookable', params: {id: item.bookable.id} }">{{item.bookable.title}}</router-link>
+                        </span>
+                        <span class="font-weight-bold">${{ item.price.total }}</span>
+                    </div>
+                    <div class="pt-2 pb-2 d-flex justify-content-between">
+                        <span>From {{ item.dates.from }}</span>
+                        <span>To {{ item.dates.to }}</span>
+                    </div>
+                    <div class="pt-2 pb-2 text-right" @click="$store.dispatch('removeFromBasket', item.bookable.id)">
+                        <button class="btn btn-sm btn-outline-secondary">
+                            <i class="fas fa-trash-alt"></i>
+                        </button>
+                    </div>
                 </div>
             </div>
         </div>
@@ -35,6 +49,9 @@
 <style scoped>
     h6.badge {
         font-size: 100%;
+    }
+    a {
+        color: black;
     }
 
 </style>
