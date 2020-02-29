@@ -5,6 +5,7 @@ import Bookables from './bookables/BookablesList';
 import Bookable from './bookable/BookableItem';
 import Review from './review/Review';
 import NotFound from "./shared/components/NotFound";
+import Basket from "./basket/Basket";
 
 const routes = [
     {
@@ -21,6 +22,11 @@ const routes = [
         path: '/review/:id',
         component: Review,
         name: 'review'
+    },
+    {
+        path: '/basket',
+        component: Basket,
+        name: 'basket'
     },
     {
         path: '*',
