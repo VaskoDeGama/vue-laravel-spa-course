@@ -103,14 +103,14 @@
                 }
             },
             addToBasket() {
-                this.$store.dispatch('addBasket', {
+                this.$store.dispatch('addToBasket', {
                     bookable: this.bookable,
                     price: this.price,
                     dates: this.lastSearch
                 })
             },
             removeFromBasket() {
-                this.$store.dispatch('removeBasket', this.bookable.id);
+                this.$store.dispatch('removeFromBasket', this.bookable.id);
             }
         }
     }
