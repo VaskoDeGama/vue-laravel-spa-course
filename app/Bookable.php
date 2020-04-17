@@ -3,6 +3,7 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Carbon;
 
 /**
  * App\bookable
@@ -51,6 +52,27 @@ class Bookable extends Model
      */
     public function availableFor($from, $to) {
         return 0 === $this->bookings()->beetwinDates($from,$to)->count();
+    }
+
+    /**
+     * @param $from
+     * @param $to
+     * @return array
+     * @throws \Exception
+     */
+    public function priceFor($from, $to) : array
+    {
+        $days = (new Carbon($from))->diffInDays(new Carbon($to));
+        $price = $days * $this->price;
+
+        return [
+            'total' => $price,
+            'breakdown' => [
+                $this->price => $days
+            ]
+        ];
+
+
     }
 
 }
