@@ -17,7 +17,7 @@ class CreateAddressesTable extends Migration
             $table->bigIncrements('id');
             $table->timestamps();
 
-            $table->string('fires_name');
+            $table->string('first_name');
             $table->string('last_name');
             $table->string('email');
             $table->string('street');

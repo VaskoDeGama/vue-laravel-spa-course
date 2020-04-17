@@ -44,6 +44,10 @@ class Booking extends Model
         return $this->hasOne(Review::class);
     }
 
+    public function adress()  {
+        return $this -> belongsTo(Address::class);
+    }
+
     /**
      * scope for query Beetwin Dates
      * @param Builder $query
