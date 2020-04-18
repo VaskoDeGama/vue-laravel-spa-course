@@ -7,6 +7,7 @@ import Review from './review/Review';
 import NotFound from "./shared/components/NotFound";
 import Basket from "./basket/Basket";
 
+
 const routes = [
     {
         path: '/',
@@ -27,6 +28,11 @@ const routes = [
         path: '/basket',
         component: Basket,
         name: 'basket'
+    },
+    {
+        path: '/auth/login',
+        component: require('./auth/Login').default,
+        name: 'Login'
     },
     {
         path: '*',
