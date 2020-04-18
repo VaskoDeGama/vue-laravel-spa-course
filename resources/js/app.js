@@ -30,6 +30,16 @@ Vue.filter('fromNow', value => {
 
 const store = new Vuex.Store(storeDeginition);
 
+window.axios.interceptors.response.use(
+  response => response,
+  error => {
+      if(401 === error.response.status) {
+          store.dispatch('logout');
+      }
+      return Promise.reject(error);
+  }
+);
+
 const app = new Vue({
     el: '#app',
     store,
@@ -39,6 +49,7 @@ const app = new Vue({
     },
     async beforeCreate() {
         this.$store.dispatch('loadStoredState');
+        this.$store.dispatch('loadUser');
     }
 
 });

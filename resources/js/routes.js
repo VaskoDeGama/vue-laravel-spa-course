@@ -32,7 +32,7 @@ const routes = [
     {
         path: '/auth/login',
         component: require('./auth/Login').default,
-        name: 'Login'
+        name: 'login'
     },
     {
         path: '*',
